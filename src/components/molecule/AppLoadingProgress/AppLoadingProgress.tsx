@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from '@/components'
+import { Box, CircularProgress } from '../../../components'
 
 export function AppLoadingProgress() {
   return (

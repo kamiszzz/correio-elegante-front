@@ -1,5 +1,5 @@
-import { Box, Button, CircularProgress, IconButton, Typography } from '@/components';
-import { api } from '@/services';
+import { Box, Button, CircularProgress, IconButton, Typography } from '../../../components';
+import { http } from '../../../services';
 import { AttachFile, DeleteOutline } from '@mui/icons-material';
 import { useRef, useState } from 'react';
 
@@ -33,7 +33,7 @@ export function InputFile({ id, fileUrl, bucketFilePath, label, handleUpdateFile
       const filePath = URL.createObjectURL(e?.target?.files[0]);
       setFile(filePath)
 
-      const { data: res } = await api.post(`/upload`, formData, {
+      const { data: res } = await http.post(`/upload`, formData, {
         headers: { "Content-Type": "multipart/form-data" }
       })
       // setFileInfo(e.target.files[0])

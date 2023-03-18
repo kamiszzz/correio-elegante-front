@@ -1,5 +1,5 @@
 import { Drawer as DrawerMui, DrawerProps } from '@mui/material'
-import { Box } from '@/components'
+import { Box } from '../../../components'
 
 export function Drawer(props: DrawerProps) {
   return (

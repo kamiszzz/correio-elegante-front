@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { DataGrid as DataGridMui, ptBR } from '@mui/x-data-grid';
-import { Box } from '@/components';
-import { Toolbar } from './Toolbar';
+import { Box } from '../../../components';
+
 
 export function DataGrid({ tableData, searchTextLabel, initialState = undefined, filterValue = undefined, orderBy = 'desc' }: any) {
   const [searchText, setSearchText] = useState('');
@@ -27,7 +27,7 @@ export function DataGrid({ tableData, searchTextLabel, initialState = undefined,
         rows={filteredRows}
         columns={tableData.columns}
         components={{
-          Toolbar: Toolbar,
+
         }}
         initialState={{
           // filter: filter,
