@@ -1,4 +1,4 @@
-import { Box } from '../..'
+import { Box } from '../../../components'
 import { SwipeableDrawer as SwipeableDrawerMui } from '@mui/material'
 
 export function SwipeableDrawer(props) {
