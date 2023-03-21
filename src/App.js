@@ -8,15 +8,16 @@ import {
 } from "react-router-dom";
 
 import { AppContext, LoggedUserContext } from "./contexts";
-import { Layout, AppLoadingProgress} from "./components";
+import { Layout, AppLoadingProgress, Snackbar } from "./components";
 
 export function App() {
-  const { loggedUser } = useContext(AppContext);
-  const { isUserLoading } = useContext(LoggedUserContext);
+  const { loadingApp } = useContext(AppContext);
+  const { loggedUser } = useContext(LoggedUserContext);
 
-  if (!loggedUser && isUserLoading) return <AppLoadingProgress />;
+  if (loadingApp) return <AppLoadingProgress />;
   else
     return (
+      <>
       <BrowserRouter>
         <Routes>
           {!loggedUser ? (
@@ -55,7 +56,10 @@ export function App() {
             </>
           )}
 
+         
         </Routes>
       </BrowserRouter>
+       <Snackbar />
+       </>
     );
 }

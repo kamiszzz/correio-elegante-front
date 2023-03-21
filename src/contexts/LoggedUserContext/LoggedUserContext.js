@@ -4,9 +4,10 @@ import { AppContext } from '../AppContext';
 export const LoggedUserContext = createContext()
 
 export function LoggedUserProvider(props) {
-  const { setLoggedUser } = useContext(AppContext);
+  const { setLoadingApp } = useContext(AppContext);
+  const [loggedUser, setLoggedUser] = useState(false)
   const [refreshUser, setRefreshUser] = useState(false)
-  const [isUserLoading, setIsUserLoading] = useState(true)
+ 
 
   useEffect(() => {
     fetchData()
@@ -14,13 +15,13 @@ export function LoggedUserProvider(props) {
 
   async function fetchData() {
     try {
-      setIsUserLoading(true)
+      setLoadingApp(true)
     //   const { data: userData } = await api.get("/user/me/logged")
     //   setLoggedUser(userData)
     } catch (error) {
       setLoggedUser(false)
     } finally {
-      setIsUserLoading(false)
+      setLoadingApp(false)
     }
   }
 
@@ -28,8 +29,8 @@ export function LoggedUserProvider(props) {
     <LoggedUserContext.Provider value={{
       refreshUser,
       setRefreshUser,
-      isUserLoading,
-      setIsUserLoading,
+      setLoggedUser,
+      loggedUser
     }} >
       {props.children}
     </LoggedUserContext.Provider>

@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const AppContext = createContext();
 
 export function AppProvider(props) {
-  const [loggedApp, setLoggedApp] = useState(false);
+  const [loadingApp, setLoadingApp] = useState(false);
   const [openMensagem, setOpenMensagem] = useState(false);
   const [mensagem, setmensagem] = useState("");
   const [tipo, setTipo] = useState("success");
@@ -11,8 +11,8 @@ export function AppProvider(props) {
   return (
     <AppContext.Provider
       value={{
-        loggedApp,
-        setLoggedApp,
+        loadingApp, 
+        setLoadingApp,
         setmensagem,
         openMensagem,
         setOpenMensagem,
