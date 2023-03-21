@@ -1,4 +1,5 @@
 import axios from "axios"
+import { useHistory } from "react-router-dom";
 
 export const http = axios.create({
   baseURL: "http://localhost:5000/api/v1",
@@ -7,16 +8,29 @@ export const http = axios.create({
 
 
 http.interceptors.request.use(
-  async (request) => {
-    const token = await localStorage.getItem('token')
-    request.headers['Authorization'] = `Bearer ${token}`
-    return request
-  },
-  async (err) => {
-    if (err.response.status === 401) {
-      localStorage.clear() 
-      window.location.reload(true);
+  (config) => {
+    // Adicione o token de autenticação à requisição, se ele estiver disponível
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
-    return Promise.reject(err)
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-)
+);
+
+http.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    const history = useHistory();
+    if (error.response.status === 401) {
+      // Redirecione para a página inicial
+      history.push("/");
+    }
+    return Promise.reject(error);
+  }
+);

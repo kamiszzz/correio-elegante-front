@@ -1,12 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-import { indigo } from '@mui/material/colors';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { LoggedUserProvider } from './contexts'
+import { indigo } from "@mui/material/colors";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { AppProvider, LoggedUserProvider } from "./contexts";
 
-import { App } from './App'
-import './styles/global.css'
+import { App } from "./App";
+import "./styles/global.css";
 
 const theme = createTheme({
   palette: {
@@ -23,10 +23,12 @@ const theme = createTheme({
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <LoggedUserProvider>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </LoggedUserProvider>
+    <AppProvider>
+      <LoggedUserProvider>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </LoggedUserProvider>
+    </AppProvider>
   </React.StrictMode>
 );

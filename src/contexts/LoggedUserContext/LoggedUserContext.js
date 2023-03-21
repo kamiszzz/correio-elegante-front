@@ -1,9 +1,10 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState, useContext } from 'react'
+import { AppContext } from '../AppContext';
 
 export const LoggedUserContext = createContext()
 
 export function LoggedUserProvider(props) {
-  const [loggedUser, setLoggedUser] = useState(false)
+  const { setLoggedUser } = useContext(AppContext);
   const [refreshUser, setRefreshUser] = useState(false)
   const [isUserLoading, setIsUserLoading] = useState(true)
 
@@ -25,8 +26,6 @@ export function LoggedUserProvider(props) {
 
   return (
     <LoggedUserContext.Provider value={{
-      loggedUser,
-      setLoggedUser,
       refreshUser,
       setRefreshUser,
       isUserLoading,
