@@ -15,7 +15,7 @@ export const auth = {
   async getUser() {
     const token = await localStorage.getItem('token')
     if (!token) return false
-    const res = await http.get('/user/me')
+    const res = await http.get('/users/me',{},await this.getHeaderConfig())
     return res.data
   },
 
@@ -27,12 +27,12 @@ export const auth = {
   },
 
   async onSignOut() {
-    try {
-      await http.post('/logout')
-    } catch (error) {
-      return true
-    } finally {
-      localStorage.removeItem('token')
-    }
+    localStorage.removeItem('token')
+    return true
   },
+
+  async login(nome, cpf) {
+    const res = await http.post('/auth/login',{nome, cpf})
+    return res?.data
+  }
 }

@@ -9,6 +9,7 @@ import {
 
 import { AppContext, LoggedUserContext } from "./contexts";
 import { Layout, AppLoadingProgress, Snackbar } from "./components";
+import { Login } from "./pages";
 
 export function App() {
   const { loadingApp } = useContext(AppContext);
@@ -18,48 +19,39 @@ export function App() {
   else
     return (
       <>
-      <BrowserRouter>
-        <Routes>
-          {!loggedUser ? (
-            <>
-              <Route
-                path="/login"
-                element={
-                  <>
-                    <h1>dfghjgdsfhgsdd</h1>
-                  </>
-                }
-              />
-              {/* <Route path="/signin" element={<SignIn />} /> */}
-              {/* <Route path="/password-reset" element={<PasswordReset />} /> */}
-              <Route path="*" element={<Navigate to="/login" />} />
-            </>
-          ) : (
-            <>
-              <Route
-                element={
-                  <Layout userRole="staff">
-                    {" "}
-                    <Outlet />{" "}
-                  </Layout>
-                }
-              >
+        <BrowserRouter>
+          <Routes>
+            {!loggedUser ? (
+              <>
+                <Route path="/login" element={<Login />} />
+                <Route path="*" element={<Navigate to="/login" />} />
+              </>
+            ) : (
+              <>
                 <Route
-                  path="/"
                   element={
-                    <>
-                      <h1>2222222222222222</h1>
-                    </>
+                    <Layout userRole="staff">
+                      {" "}
+                      <Outlet />{" "}
+                    </Layout>
                   }
-                />
-              </Route>
-            </>
-          )}
-
-         
-        </Routes>
-      </BrowserRouter>
-       <Snackbar />
-       </>
+                >
+                  <Route
+                    path="/home"
+                    element={
+                      <>
+                        <h1>2222222222222222</h1>
+                      </>
+                    }
+                  />
+                  <Route path="*" element={<Navigate to="/home" />} />
+                </Route>
+                
+              </>
+            )}
+          </Routes>
+        </BrowserRouter>
+        <Snackbar />
+      </>
     );
 }

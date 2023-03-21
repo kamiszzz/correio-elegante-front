@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState, useContext } from 'react'
 import { AppContext } from '../AppContext';
+import { auth } from '../../services';
+
 
 export const LoggedUserContext = createContext()
 
@@ -14,10 +16,10 @@ export function LoggedUserProvider(props) {
   }, [refreshUser])
 
   async function fetchData() {
+    setLoadingApp(true)
     try {
-      setLoadingApp(true)
-    //   const { data: userData } = await api.get("/user/me/logged")
-    //   setLoggedUser(userData)
+      const data  = await auth.getUser()
+      setLoggedUser(data)
     } catch (error) {
       setLoggedUser(false)
     } finally {

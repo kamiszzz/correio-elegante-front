@@ -1,11 +1,11 @@
-import axios from "axios"
-import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { auth } from '../services';
 
 export const http = axios.create({
   baseURL: "http://localhost:5000/api/v1",
-  timeout: 10000
+  timeout: 10000,
 });
-
 
 http.interceptors.request.use(
   (config) => {
@@ -26,10 +26,11 @@ http.interceptors.response.use(
     return response;
   },
   (error) => {
-    const history = useHistory();
+    const navigate = useNavigate();
     if (error.response.status === 401) {
       // Redirecione para a página inicial
-      history.push("/");
+      auth.onSignOut()
+      navigate("/");
     }
     return Promise.reject(error);
   }
