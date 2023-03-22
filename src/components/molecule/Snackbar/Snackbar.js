@@ -1,12 +1,12 @@
-import React,{  forwardRef,useContext } from "react";
-import {Snackbar as SnackbarMui} from "@mui/material";
+import React, { forwardRef, useContext } from "react";
+import { Snackbar as SnackbarMui } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { AppContext } from "../../../contexts";
 
-export const Snackbar = (props)=>{
-
-    const { setOpenMensagem,openMensagem,mensagem, tipo } = useContext(AppContext);
+export const Snackbar = (props) => {
+  const { setOpenMensagem, openMensagem, mensagem, tipo } =
+    useContext(AppContext);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -31,4 +31,4 @@ export const Snackbar = (props)=>{
       </SnackbarMui>
     </Stack>
   );
-}
+};
